@@ -9,30 +9,176 @@
 body {
     margin: 0;
     padding: 0;
-    background: #fff7e6; /* Cream */
+    background: #fff7e6;
     height: 100vh;
     overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
 }
 
-/* Main Box */
+/* Container */
 .container {
     position: relative;
-    top: 6%;
+    top: 5%;
     color: #7a0019;
 }
 
-/* Photo */
+/* Image */
 .photo {
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    border: 6px solid #ff4d6d;
-    box-shadow: 0 0 25px rgba(255,0,0,0.4);
+    border: 5px solid #ff4d6d;
     object-fit: cover;
 }
 
-/* Title */
+/* Heading */
 h1 {
-    font-size: 46px;
+    font-size: 42px;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 20px;
+    max-width: 650px;
+    margin: auto;
+}
+
+/* Scene */
+.scene {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    margin: 25px 0;
+}
+
+/* Girl */
+.girl {
+    position: absolute;
+    right: 25%;
+    bottom: 0;
+    width: 80px;
+    height: 160px;
+    background: #ff9ff3;
+    border-radius: 20px;
+}
+
+.girl::before {
+    content: "😊";
+    position: absolute;
+    top: -40px;
+    left: 18px;
+    font-size: 36px;
+}
+
+/* Boy Kneeling */
+.boy {
+    position: absolute;
+    left: 25%;
+    bottom: -15px;
+    width: 80px;
+    height: 130px;
+    background: #4b7bec;
+    border-radius: 20px;
+    transform: rotate(-12deg);
+}
+
+.boy::before {
+    content: "🥰";
+    position: absolute;
+    top: -40px;
+    left: 18px;
+    font-size: 36px;
+}
+
+/* Big Rose */
+.rose {
+    position: absolute;
+    left: 46%;
+    bottom: 70px;
+    font-size: 60px;
+    animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Hearts */
+.heart {
+    position: absolute;
+    font-size: 40px;
+    animation: float 4.5s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-260px);
+        opacity: 0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
+<div class="container">
+
+<img src="pavani.jpg" class="photo">
+
+<h1>🌹 Happy Rose Day Pavani ❤️</h1>
+
+<div class="scene">
+
+    <div class="boy"></div>
+
+    <div class="rose">🌹</div>
+
+    <div class="girl"></div>
+
+</div>
+
+<p>
+Nee smile na life lo biggest gift ❤️<br>
+Nee pakkana undadam na biggest dream 💫<br><br>
+
+Forever Yours 💕
+</p>
+
+</div>
+
+<script>
+
+/* Hearts Only */
+function createHeart(){
+
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+
+    h.style.left = Math.random()*window.innerWidth+"px";
+    h.style.bottom = "0px";
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>{ h.remove(); },4500);
+}
+
+setInterval(createHeart,500);
+
+</script>
+
+</body>
+</html>
