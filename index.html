@@ -1,8 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For Pavani ❤️</title>
 
 <style>
@@ -11,42 +12,136 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body{
     min-height:100vh;
-    background:linear-gradient(135deg,#fffaf0,#fff1dc);
-    overflow:hidden;
+    background:#fff8ee;
     display:flex;
     justify-content:center;
     align-items:center;
+    overflow:hidden;
 }
 
 /* Card */
 .card{
-    background:rgba(255,255,255,0.75);
-    backdrop-filter:blur(12px);
-    padding:25px 20px;
-    border-radius:20px;
+    background:white;
+    width:90%;
+    max-width:360px;
+    padding:20px;
+    border-radius:18px;
     text-align:center;
-    width:360px;
-    box-shadow:0 0 40px rgba(255,0,100,0.25);
-    z-index:2;
-    animation:zoom 1.2s ease;
-}
-
-@keyframes zoom{
-    from{transform:scale(0.7);opacity:0;}
-    to{transform:scale(1);opacity:1;}
+    box-shadow:0 0 20px rgba(0,0,0,0.15);
 }
 
 /* Title */
 h1{
     color:#b3003c;
+    font-size:24px;
     margin-bottom:10px;
 }
 
 /* GIF */
 .gif{
-    width:90%;
+    width:100%;
+    border-radius:12px;
+    margin:10px 0;
+}
+
+/* Message */
+.msg{
+    font-size:18px;
+    color:#4a0020;
+    line-height:1.5;
+    margin-top:10px;
+}
+
+/* Play Button */
+#playBtn{
+    margin-top:12px;
+    padding:8px 16px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    border-radius:20px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    font-size:22px;
+    animation:float 5s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="bgm" preload="auto" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
+<!-- Main Card -->
+<div class="card">
+
+    <h1>🌹 Happy Rose Day Pavani!</h1>
+
+    <img src="./shakespaw.gif" class="gif" alt="Love GIF">
+
+    <div class="msg">
+        With you, and your smile…<br>
+        I have everything ❤️
+    </div>
+
+    <button id="playBtn">▶ Play Music 🎵</button>
+
+</div>
+
+<script>
+
+/* Music */
+const music = document.getElementById("bgm");
+const btn = document.getElementById("playBtn");
+
+btn.addEventListener("click", ()=>{
+    music.play().catch(()=>{});
+    btn.style.display="none";
+});
+
+/* Floating Hearts */
+function createHeart(){
+
+    const h = document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+
+    h.style.left=Math.random()*100+"vw";
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),5000);
+}
+
+setInterval(createHeart,700);
+
+</script>
+
+</body>
+</html>
