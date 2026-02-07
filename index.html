@@ -10,86 +10,154 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
 }
 
 body{
     min-height:100vh;
-    background: linear-gradient(135deg,#fff1d6,#ffe4ec);
+    background: linear-gradient(135deg,#fffaf0,#fff1dc);
     overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-/* Background Hearts */
-.bg span{
-    position:absolute;
-    font-size:30px;
-    animation:float 8s linear infinite;
-    opacity:0.3;
-}
-
-@keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-100px);}
-}
-
-/* Card */
+/* Main Card */
 .card{
-    width:350px;
-    padding:25px;
-    background:rgba(255,255,255,0.25);
-    backdrop-filter:blur(15px);
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    padding:25px 20px;
     border-radius:20px;
-    box-shadow:0 0 40px rgba(255,0,100,0.2);
     text-align:center;
-    animation:zoom 1.5s ease;
+    box-shadow:0 0 40px rgba(255,0,100,0.2);
+    width:350px;
+    z-index:2;
+    animation:zoom 1.2s ease;
 }
 
 @keyframes zoom{
-    from{transform:scale(0.6);opacity:0;}
+    from{transform:scale(0.7);opacity:0;}
     to{transform:scale(1);opacity:1;}
 }
 
-/* Image */
-.photo{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid #ff4d6d;
-    box-shadow:0 0 25px rgba(255,0,100,0.5);
+/* GIF */
+.gif{
+    width:90%;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(255,0,100,0.3);
 }
 
-/* Text */
+/* Heading */
 h1{
-    margin:15px 0;
+    margin:15px 0 8px;
     color:#b3003c;
 }
 
+/* Message */
 .msg{
     font-size:18px;
     color:#5a0022;
     line-height:1.5;
-    opacity:0;
-    animation:fade 2s forwards;
-    animation-delay:1.5s;
 }
 
-@keyframes fade{
-    to{opacity:1;}
-}
-
-/* Neon Love */
-.love{
-    margin-top:15px;
+/* Floating Icons */
+.float{
+    position:absolute;
     font-size:28px;
-    color:#ff0055;
-    text-shadow:0 0 10px #ff0055,
-                0 0 20px #ff0055;
-    animation:pulse 1.5s infinite;
+    animation:floatUp linear infinite;
+    opacity:0.7;
 }
 
-@keyframes pulse{
-    50%{transform:scale(1.2);}
+@keyframes floatUp{
+    from{
+        transform:translateY(100vh) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120px) scale(1.5);
+        opacity:0;
+    }
+}
+
+/* Sparkles */
+.sparkle{
+    position:absolute;
+    font-size:18px;
+    animation:spark 3s infinite;
+    opacity:0.8;
+}
+
+@keyframes spark{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+<source src="crazy.mp3">
+</audio>
+
+<!-- Main Card -->
+<div class="card">
+
+    <h1>🌹 Happy Rose Day Pavani !</h1>
+
+    <!-- GIF -->
+    <img src="shakespaw.gif" class="gif">
+
+    <div class="msg">
+        With you, and your smile…<br>
+        I have everything ❤️
+    </div>
+
+</div>
+
+<script>
+
+/* Hearts + Roses */
+function createFloat(){
+
+    const el = document.createElement("div");
+    el.className = "float";
+
+    const icons = ["❤️","🌹"];
+    el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+
+    el.style.left = Math.random()*100+"vw";
+    el.style.animationDuration = 5 + Math.random()*5 + "s";
+
+    document.body.appendChild(el);
+
+    setTimeout(()=>el.remove(),9000);
+}
+
+setInterval(createFloat,350);
+
+
+/* Sparkles */
+function createSparkle(){
+
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.innerHTML = "✨";
+
+    s.style.left = Math.random()*100+"vw";
+    s.style.top = Math.random()*100+"vh";
+
+    document.body.appendChild(s);
+
+    setTimeout(()=>s.remove(),3000);
+}
+
+setInterval(createSparkle,400);
+
+</script>
+
+</body>
+</html>
