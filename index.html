@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day Pavani ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+/* Main Container */
+.container {
+    position: relative;
+    top: 8%;
+    color: white;
+}
+
+/* Photo */
+.photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 6px solid white;
+    box-shadow: 0 0 25px pink;
+    object-fit: cover;
+}
+
+/* Heart Animation */
+.heart {
+    font-size: 25px;
+    position: absolute;
+    animation: float 4s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-150px); opacity: 0; }
+}
+
+/* Text */
+h1 {
+    font-size: 45px;
+    margin-top: 15px;
+}
+
+p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: auto;
+}
+
+/* Rose */
+.rose {
+    font-size: 45px;
+    margin: 15px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Petals */
+.petal {
+    position: absolute;
+    top: -40px;
+    font-size: 24px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+
+    <img src="pavani.jpg" class="photo" alt="Pavani ❤️">
+
+    <h1>🌹 Happy Rose Day Pavani ❤️</h1>
+
+    <div class="rose">🌹🌹🌹</div>
+
+    <p>
+        Nee smile na life lo biggest blessing ❤️<br>
+        Prathi roju nee pakkana undadam na dream 💫<br><br>
+
+        You are my today,<br>
+        My tomorrow,<br>
+        My forever 💖<br><br>
+
+        Forever Yours,<br>
+        <b>Your Love</b> 💕
+    </p>
+
+</div>
+
+<script>
+
+/* Falling Petals */
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerHTML = "🌸";
+
+    petal.style.left = Math.random() * window.innerWidth + "px";
+    petal.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 8000);
+}
+
+setInterval(createPetal, 300);
+
+/* Floating Hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 4000);
+}
+
+setInterval(createHeart, 600);
+
+</script>
+
+</body>
+</html>
