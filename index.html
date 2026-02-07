@@ -1,126 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Happy Rose Day Pavani ❤️</title>
+<title>For Pavani ❤️</title>
 
 <style>
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #fff7e6;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    text-align: center;
+body{
+    margin:0;
+    background:#fff7e6;
+    font-family:Arial;
+    overflow:hidden;
+    text-align:center;
 }
 
-/* Container */
-.container {
-    position: relative;
-    top: 5%;
-    color: #7a0019;
+/* Text */
+h1{
+    margin-top:20px;
+    color:#7a0019;
 }
 
-/* Image */
-.photo {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    border: 5px solid #ff4d6d;
-    object-fit: cover;
-}
-
-/* Heading */
-h1 {
-    font-size: 42px;
-    margin: 10px 0;
-}
-
-p {
-    font-size: 20px;
-    max-width: 650px;
-    margin: auto;
+p{
+    font-size:20px;
+    color:#7a0019;
 }
 
 /* Scene */
-.scene {
-    position: relative;
-    width: 100%;
-    height: 240px;
-    margin: 25px 0;
+.scene{
+    position:relative;
+    width:100%;
+    height:300px;
+    margin-top:20px;
 }
 
 /* Girl */
-.girl {
-    position: absolute;
-    right: 25%;
-    bottom: 0;
-    width: 80px;
-    height: 160px;
-    background: #ff9ff3;
-    border-radius: 20px;
+.girl{
+    position:absolute;
+    right:22%;
+    bottom:0;
+    width:80px;
+    height:160px;
+    background:#ff9ff3;
+    border-radius:20px;
 }
 
-.girl::before {
-    content: "😊";
-    position: absolute;
-    top: -40px;
-    left: 18px;
-    font-size: 36px;
+.girl:before{
+    content:"😍";
+    position:absolute;
+    top:-40px;
+    left:18px;
+    font-size:35px;
 }
 
-/* Boy Kneeling */
-.boy {
-    position: absolute;
-    left: 25%;
-    bottom: -15px;
-    width: 80px;
-    height: 130px;
-    background: #4b7bec;
-    border-radius: 20px;
-    transform: rotate(-12deg);
+/* Boy */
+.boy{
+    position:absolute;
+    left:22%;
+    bottom:0;
+    width:80px;
+    height:160px;
+    background:#4b7bec;
+    border-radius:20px;
+
+    animation:kneel 3s infinite;
 }
 
-.boy::before {
-    content: "🥰";
-    position: absolute;
-    top: -40px;
-    left: 18px;
-    font-size: 36px;
+.boy:before{
+    content:"🥰";
+    position:absolute;
+    top:-40px;
+    left:18px;
+    font-size:35px;
 }
 
-/* Big Rose */
-.rose {
-    position: absolute;
-    left: 46%;
-    bottom: 70px;
-    font-size: 60px;
-    animation: pulse 1.4s infinite;
+/* Hand */
+.hand{
+    position:absolute;
+    width:50px;
+    height:10px;
+    background:#ffd1a9;
+    right:-45px;
+    top:70px;
+
+    animation:handMove 3s infinite;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
+/* Rose */
+.rose{
+    position:absolute;
+    font-size:45px;
+    right:-25px;
+    top:45px;
+
+    animation:roseMove 3s infinite;
+}
+
+/* Animations */
+
+@keyframes kneel{
+    0%{height:160px;}
+    50%{height:110px;}
+    100%{height:160px;}
+}
+
+@keyframes handMove{
+    0%{width:20px;}
+    50%{width:60px;}
+    100%{width:20px;}
+}
+
+@keyframes roseMove{
+    0%{transform:translateX(0);}
+    50%{transform:translateX(80px);}
+    100%{transform:translateX(0);}
 }
 
 /* Hearts */
-.heart {
-    position: absolute;
-    font-size: 40px;
-    animation: float 4.5s linear infinite;
+.heart{
+    position:absolute;
+    font-size:35px;
+    animation:float 4s linear infinite;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
+@keyframes float{
+    from{
+        transform:translateY(0);
+        opacity:1;
     }
-    100% {
-        transform: translateY(-260px);
-        opacity: 0;
+    to{
+        transform:translateY(-250px);
+        opacity:0;
     }
 }
 
@@ -129,57 +138,48 @@ p {
 
 <body>
 
-<!-- Music -->
-<audio autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
-</audio>
-
-<div class="container">
-
-<img src="pavani.JPG" class="photo">
-
 <h1>🌹 Happy Rose Day Pavani ❤️</h1>
 
 <div class="scene">
 
-    <div class="boy"></div>
+    <!-- Boy -->
+    <div class="boy">
 
-    <div class="rose">🌹</div>
+        <div class="hand"></div>
+        <div class="rose">🌹</div>
 
+    </div>
+
+    <!-- Girl -->
     <div class="girl"></div>
 
 </div>
 
 <p>
-Nee smile na life lo biggest gift ❤️<br>
-Nee pakkana undadam na biggest dream 💫<br><br>
-
-Forever Yours 💕
+Nee smile na life ❤️<br>
+Forever yours 💕
 </p>
-
-</div>
 
 <script>
 
-/* Hearts Only */
-function createHeart(){
+/* Hearts */
+function heart(){
 
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "❤️";
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
 
-    h.style.left = Math.random()*window.innerWidth+"px";
-    h.style.bottom = "0px";
+    h.style.left=Math.random()*window.innerWidth+"px";
+    h.style.bottom="0px";
 
     document.body.appendChild(h);
 
-    setTimeout(()=>{ h.remove(); },4500);
+    setTimeout(()=>h.remove(),4000);
 }
 
-setInterval(createHeart,500);
+setInterval(heart,500);
 
 </script>
 
 </body>
 </html>
-
