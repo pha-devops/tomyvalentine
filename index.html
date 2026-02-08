@@ -46,7 +46,7 @@ button{
  padding:12px 25px;
  border-radius:25px;
  font-size:16px;
- margin-top:15px;
+ margin:10px;
  cursor:pointer;
 }
 
@@ -80,6 +80,7 @@ button{
 <iframe id="music"
 src="https://www.youtube.com/embed/BddP6PYo2gs?enablejsapi=1&loop=1&playlist=BddP6PYo2gs"
 style="display:none;"></iframe>
+
 
 <div id="overlay">
 
@@ -116,12 +117,24 @@ style="display:none;"></iframe>
  <h2>💍 Ammulu 💍</h2>
 
  <p style="font-size:18px;">
- You are my forever ❤️<br><br>
- Will you be mine? 💍😊<br><br>
- <b>I love you Ammulu ❤️</b>
+ Will you be mine forever? 💖
  </p>
 
+ <div style="margin-top:20px; position:relative; height:80px;">
+
+   <button onclick="sayYes()" id="yesBtn">Yes ❤️</button>
+
+   <button id="noBtn"
+   style="position:absolute; left:140px;">
+   No 😜
+   </button>
+
+ </div>
+
+ <div id="loveMsg" style="margin-top:25px;"></div>
+
 </div>
+
 
 </div>
 </div>
@@ -129,22 +142,13 @@ style="display:none;"></iframe>
 
 <script>
 
-// Romantic Nature Backgrounds
+/* Backgrounds */
 const bg=[
 
- // Sunset Couple
  "https://images.unsplash.com/photo-1520975922284-7b9588d0c1fb",
-
- // Romantic Cafe Window
  "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
-
- // Couple Silhouette Sunset
  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-
- // Mountain Love View
  "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-
- // Rainy Romantic Road
  "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
 
 ];
@@ -159,7 +163,7 @@ setInterval(()=>{
 document.body.style.backgroundImage=`url(${bg[0]})`;
 
 
-// Floating hearts
+/* Floating Hearts */
 setInterval(()=>{
  let h=document.createElement("div");
  h.className="heart";
@@ -170,15 +174,14 @@ setInterval(()=>{
 },600);
 
 
-// Game
+/* Game */
 let score=0;
 document.getElementById("game").style.display="block";
 
 function tap(){
 
  score++;
- document.getElementById("score").innerText=
- score+" / 5";
+ document.getElementById("score").innerText=score+" / 5";
 
  if(score>=5){
   unlock();
@@ -198,7 +201,7 @@ function unlock(){
 }
 
 
-// Story Content
+/* Story */
 const story=[
 
 "At one point in my life, I thought I didn’t need anyone.",
@@ -248,6 +251,7 @@ const story=[
 "That’s how important you are to me.",
 
 "I love you Ammulu ❤️"
+
 ];
 
 let line=0, char=0;
@@ -283,8 +287,74 @@ function next(){
   document.getElementById("story").style.display="none";
   document.getElementById("final").style.display="block";
  }
-
 }
+
+
+/* No Button Run */
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("click",moveNo);
+
+function moveNo(){
+
+ let x=Math.random()*200;
+ let y=Math.random()*50;
+
+ noBtn.style.left=x+"px";
+ noBtn.style.top=y+"px";
+}
+
+
+/* Yes Button */
+function sayYes(){
+
+ document.getElementById("loveMsg").innerHTML=`
+ <h3 style="color:#e91e63;">
+ I love you dear ❤️🥰
+ </h3>
+ <p>You are mine forever 💍</p>
+ `;
+
+ startLoveRain();
+}
+
+
+/* Hearts + Roses Rain */
+function startLoveRain(){
+
+ setInterval(()=>{
+
+  let item=document.createElement("div");
+
+  let symbols=["❤️","💖","🌹","💕","🌸"];
+
+  item.innerHTML=symbols[
+   Math.floor(Math.random()*symbols.length)
+  ];
+
+  item.style.position="absolute";
+  item.style.left=Math.random()*100+"vw";
+  item.style.top="-20px";
+  item.style.fontSize=(25+Math.random()*25)+"px";
+  item.style.animation="fall 4s linear";
+
+  document.body.appendChild(item);
+
+  setTimeout(()=>item.remove(),4000);
+
+ },200);
+}
+
+
+/* Falling Animation */
+let style=document.createElement("style");
+style.innerHTML=`
+@keyframes fall{
+ from{transform:translateY(0);opacity:1;}
+ to{transform:translateY(100vh);opacity:0;}
+}`;
+document.head.appendChild(style);
 
 </script>
 
