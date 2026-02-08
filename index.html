@@ -3,143 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For Pavani ❤️</title>
+<title>For Ammulu ❤️</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, sans-serif;
+body {
+ margin:0;
+ font-family:Segoe UI, sans-serif;
+ height:100vh;
+ overflow:hidden;
+ background-size:cover;
+ background-position:center;
+ transition:1s;
 }
 
-body{
-    min-height:100vh;
-    background:#fff8ee;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
+#overlay{
+ background:rgba(0,0,0,0.6);
+ height:100%;
+ display:flex;
+ justify-content:center;
+ align-items:center;
 }
 
-/* Card */
-.card{
-    background:white;
-    width:90%;
-    max-width:360px;
-    padding:20px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0 0 20px rgba(0,0,0,0.15);
+#box{
+ background:white;
+ width:90%;
+ max-width:380px;
+ padding:25px;
+ border-radius:20px;
+ text-align:center;
+ box-shadow:0 0 25px pink;
+ position:relative;
 }
 
-/* Title */
-h1{
-    color:#b3003c;
-    font-size:24px;
-    margin-bottom:10px;
+h2{color:#e91e63;}
+
+button{
+ background:#e91e63;
+ color:white;
+ border:none;
+ padding:12px 25px;
+ border-radius:25px;
+ font-size:16px;
+ margin-top:15px;
+ cursor:pointer;
 }
 
-/* GIF */
-.gif{
-    width:100%;
-    border-radius:12px;
-    margin:10px 0;
+#text{
+ min-height:110px;
+ font-size:17px;
+ line-height:1.5;
+ margin:15px 0;
 }
 
-/* Message */
-.msg{
-    font-size:18px;
-    color:#4a0020;
-    line-height:1.5;
-    margin-top:10px;
-}
-
-/* Play Button */
-#playBtn{
-    margin-top:12px;
-    padding:8px 16px;
-    border:none;
-    background:#ff4d6d;
-    color:white;
-    border-radius:20px;
-    font-size:14px;
-    cursor:pointer;
-}
-
-/* Floating Hearts */
 .heart{
-    position:absolute;
-    font-size:22px;
-    animation:float 5s linear infinite;
-    opacity:0.7;
+ position:absolute;
+ font-size:26px;
+ animation:float 6s linear infinite;
+ color:pink;
 }
 
 @keyframes float{
-    from{
-        transform:translateY(100vh);
-        opacity:1;
-    }
-    to{
-        transform:translateY(-120px);
-        opacity:0;
-    }
+ from{transform:translateY(100vh);opacity:0;}
+ to{transform:translateY(-100vh);opacity:1;}
 }
+
+#game,#story,#final{display:none;}
 
 </style>
 </head>
 
 <body>
 
-<!-- Music -->
-<audio id="bgm" preload="auto" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
-</audio>
+<!-- Kesariya Music -->
+<iframe id="music"
+src="https://www.youtube.com/embed/BddP6PYo2gs?enablejsapi=1&loop=1&playlist=BddP6PYo2gs"
+style="display:none;"></iframe>
 
-<!-- Main Card -->
-<div class="card">
+<div id="overlay">
 
-    <h1>🌹 Happy Rose Day Pavani!</h1>
+<div id="box">
 
-    <img src="./shakespaw.gif" class="gif" alt="Love GIF">
+<!-- GAME -->
+<div id="game">
 
-    <div class="msg">
-        With you, and your smile…<br>
-        I have everything ❤️
-    </div>
+ <h2>Catch My Hearts 💖</h2>
+ <p>Tap 5 hearts to unlock surprise 😘</p>
 
-    <button id="playBtn">▶ Play Music 🎵</button>
+ <h1 id="score">0 / 5</h1>
+
+ <button onclick="tap()">❤️ Tap</button>
 
 </div>
 
+
+<!-- STORY -->
+<div id="story">
+
+ <h2>For You ❤️</h2>
+
+ <div id="text"></div>
+
+ <button onclick="next()">Next 💕</button>
+
+</div>
+
+
+<!-- FINAL -->
+<div id="final">
+
+ <h2>💍 Ammulu 💍</h2>
+
+ <p style="font-size:18px;">
+ You are my forever ❤️<br><br>
+ Will you be mine? 💍😊<br><br>
+ <b>I love you Ammulu ❤️</b>
+ </p>
+
+</div>
+
+</div>
+</div>
+
+
 <script>
 
-/* Music */
-const music = document.getElementById("bgm");
-const btn = document.getElementById("playBtn");
+// Backgrounds
+const bg=[
+ "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70",
+ "https://images.unsplash.com/photo-1517841905240-472988babdf9",
+ "https://images.unsplash.com/photo-1517260911205-8f0c9c66fe45"
+];
 
-btn.addEventListener("click", ()=>{
-    music.play().catch(()=>{});
-    btn.style.display="none";
-});
+let i=0;
 
-/* Floating Hearts */
-function createHeart(){
+setInterval(()=>{
+ document.body.style.backgroundImage=`url(${bg[i]})`;
+ i=(i+1)%bg.length;
+},4000);
 
-    const h = document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
+document.body.style.backgroundImage=`url(${bg[0]})`;
 
-    h.style.left=Math.random()*100+"vw";
 
-    document.body.appendChild(h);
+// Floating hearts
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+},600);
 
-    setTimeout(()=>h.remove(),5000);
+
+// Game
+let score=0;
+document.getElementById("game").style.display="block";
+
+function tap(){
+
+ score++;
+ document.getElementById("score").innerText=
+ score+" / 5";
+
+ if(score>=5){
+  unlock();
+ }
 }
 
-setInterval(createHeart,700);
+function unlock(){
+
+ document.getElementById("game").style.display="none";
+ document.getElementById("story").style.display="block";
+
+ // Play Music
+ document.getElementById("music").contentWindow.postMessage(
+ '{"event":"command","func":"playVideo","args":""}','*');
+
+ type();
+}
+
+
+// Story
+const story=[
+
+"At one point in my life, I thought I didn’t need anyone.",
+
+"But on February 9th, the day I met you, something changed.",
+
+"The first time I saw you, I felt a strange happiness.",
+
+"I didn’t know anything about you then…",
+
+"but I felt a vibe.",
+
+"And from that moment, I started liking you.",
+
+"Choosing someone for a lifetime is never easy.",
+
+"Everyone goes through confusion, doubts, and fear.",
+
+"Being an overthinker, I felt all of that even more.",
+
+"But from the first day itself, I stayed close to you —",
+
+"because I genuinely liked you.",
+
+"When I love someone,",
+
+"I love them with my whole heart.",
+
+"No half feelings. No pretending.",
+
+"Everything about you is interesting to me.",
+
+"Your words, your smile, your presence — everything.",
+
+"I’ve never said these words to anyone before.",
+
+"And I won’t say them to anyone in the future.",
+
+"I love my parents more than anything in this world.",
+
+"They are my life.",
+
+"And now…",
+
+"you are the only person I love equally with them.",
+
+"That’s how important you are to me.",
+
+"I love you Ammulu ❤️"
+];
+
+let line=0, char=0;
+
+
+function type(){
+
+ let box=document.getElementById("text");
+ box.innerHTML="";
+ char=0;
+
+ let t=setInterval(()=>{
+
+  box.innerHTML+=story[line][char];
+  char++;
+
+  if(char>=story[line].length){
+   clearInterval(t);
+  }
+
+ },40);
+}
+
+
+function next(){
+
+ line++;
+
+ if(line<story.length){
+  type();
+ }
+ else{
+  document.getElementById("story").style.display="none";
+  document.getElementById("final").style.display="block";
+ }
+
+}
 
 </script>
 
