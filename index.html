@@ -24,6 +24,28 @@ body{
     justify-content:center;
     align-items:center;
     padding:20px;
+    overflow:hidden;
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    color:rgba(255,51,102,0.4);
+    font-size:20px;
+    animation:float 8s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) scale(0.5);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-120vh) scale(1.2);
+        opacity:0;
+    }
 }
 
 /* Card */
@@ -36,17 +58,13 @@ body{
     text-align:center;
     box-shadow:0 10px 25px rgba(0,0,0,0.1);
     animation:fadeIn 1.5s ease;
+    position:relative;
+    z-index:5;
 }
 
 @keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;transform:translateY(40px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
 h1{
@@ -103,16 +121,10 @@ button:hover{
     100%{transform:scale(1);opacity:1;}
 }
 
-/* Mobile Optimization */
 @media (max-width:480px){
 
-    h1{
-        font-size:36px;
-    }
-
-    .message{
-        font-size:16px;
-    }
+    h1{font-size:36px;}
+    .message{font-size:16px;}
 
 }
 
@@ -138,34 +150,51 @@ button:hover{
 
 <script>
 
-/* Typing Text */
+/* ❤️ Floating Hearts Generator */
+
+for(let i=0;i<35;i++){
+
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = 15 + Math.random()*25 + "px";
+    heart.style.animationDuration = 6 + Math.random()*6 + "s";
+    heart.style.animationDelay = Math.random()*5 + "s";
+
+    document.body.appendChild(heart);
+}
+
+
+/* ✅ Typing Effect with HTML Support */
 
 const text = `
-Roses dry avuthayi,
-Chocolates karigipotayi...
+Roses dry avuthayi,<br>
+Chocolates karigipotayi...<br><br>
 
-Kani ninnu respect cheyadam,
-Neetho honest ga undatam,
-Neetho grow avvadam...
+Kani ninnu respect cheyadam,<br>
+Neetho honest ga undatam,<br>
+Neetho grow avvadam...<br><br>
 
 <span class="highlight">
 Naa lifetime promise 💖
-</span>
+</span><br><br>
 
-You are not just my Valentine,
+You are not just my Valentine,<br>
 You are my Future ❤️
 `;
 
-let i = 0;
-const speed = 35;
+let index = 0;
+const speed = 30;
 const target = document.getElementById("typeText");
 
 function typeWriter(){
 
-    if(i < text.length){
+    if(index < text.length){
 
-        target.innerHTML += text.charAt(i);
-        i++;
+        target.innerHTML = text.substring(0, index+1);
+        index++;
 
         setTimeout(typeWriter, speed);
     }
@@ -174,7 +203,7 @@ function typeWriter(){
 typeWriter();
 
 
-/* Button Action */
+/* Button */
 
 function showLove(){
 
