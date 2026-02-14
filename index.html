@@ -3,358 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ammulu ❤️</title>
+<title>My Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 
-body {
- margin:0;
- font-family:Segoe UI, sans-serif;
- height:100vh;
- overflow:hidden;
- background-size:cover;
- background-position:center;
- transition:1s;
- filter: brightness(0.95);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-#overlay{
- background:rgba(0,0,0,0.6);
- height:100%;
- display:flex;
- justify-content:center;
- align-items:center;
+body{
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-#box{
- background:white;
- width:90%;
- max-width:380px;
- padding:25px;
- border-radius:20px;
- text-align:center;
- box-shadow:0 0 25px pink;
- position:relative;
-}
-
-h2{color:#e91e63;}
-
-button{
- background:#e91e63;
- color:white;
- border:none;
- padding:12px 25px;
- border-radius:25px;
- font-size:16px;
- margin:10px;
- cursor:pointer;
-}
-
-#text{
- min-height:110px;
- font-size:17px;
- line-height:1.5;
- margin:15px 0;
-}
-
+/* Floating Hearts */
 .heart{
- position:absolute;
- font-size:26px;
- animation:float 6s linear infinite;
- color:pink;
+    position:absolute;
+    color:rgba(255,255,255,0.6);
+    font-size:20px;
+    animation:float 8s linear infinite;
 }
 
 @keyframes float{
- from{transform:translateY(100vh);opacity:0;}
- to{transform:translateY(-100vh);opacity:1;}
+    0%{
+        transform:translateY(100vh) scale(0.5);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-100vh) scale(1.2);
+        opacity:0;
+    }
 }
 
-#game,#story,#final{display:none;}
+/* Card */
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding:40px;
+    border-radius:20px;
+    max-width:500px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(50px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:48px;
+    color:white;
+    margin-bottom:20px;
+    text-shadow:0 0 15px pink;
+}
+
+.message{
+    color:white;
+    font-size:18px;
+    min-height:200px;
+    line-height:1.7;
+}
+
+.highlight{
+    color:#ffe600;
+    font-weight:500;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    background:#ff3366;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff0044;
+    transform:scale(1.05);
+    box-shadow:0 0 15px #ff0044;
+}
+
+/* Surprise */
+#surprise{
+    display:none;
+    margin-top:20px;
+    font-size:22px;
+    color:#fff700;
+    animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+    from{text-shadow:0 0 5px yellow;}
+    to{text-shadow:0 0 20px yellow;}
+}
 
 </style>
 </head>
-
 <body>
 
-<!-- Kesariya Music -->
-<iframe id="music"
-src="https://www.youtube.com/embed/BddP6PYo2gs?enablejsapi=1&loop=1&playlist=BddP6PYo2gs"
-style="display:none;"></iframe>
+<div class="card">
 
+    <h1>My Valentine 💖</h1>
 
-<div id="overlay">
+    <div class="message" id="typeText"></div>
 
-<div id="box">
+    <button onclick="showSurprise()">Click for Surprise 💌</button>
 
-<!-- GAME -->
-<div id="game">
-
- <h2>Catch My Hearts 💖</h2>
- <p>Tap 5 hearts to unlock surprise 😘</p>
-
- <h1 id="score">0 / 5</h1>
-
- <button onclick="tap()">❤️ Tap</button>
+    <div id="surprise">
+        You Are My Future 💍💖
+    </div>
 
 </div>
-
-
-<!-- STORY -->
-<div id="story">
-
- <h2>For You ❤️</h2>
-
- <div id="text"></div>
-
- <button onclick="next()">Next 💕</button>
-
-</div>
-
-
-<!-- FINAL -->
-<div id="final">
-
- <h2>💍 Ammulu 💍</h2>
-
- <p style="font-size:18px;">
- Will you be mine forever? 💖
- </p>
-
- <div style="margin-top:20px; position:relative; height:80px;">
-
-   <button onclick="sayYes()" id="yesBtn">Yes ❤️</button>
-
-   <button id="noBtn"
-   style="position:absolute; left:140px;">
-   No 😜
-   </button>
-
- </div>
-
- <div id="loveMsg" style="margin-top:25px;"></div>
-
-</div>
-
-
-</div>
-</div>
-
 
 <script>
 
-/* Backgrounds */
-const bg=[
+/* Floating hearts */
+for(let i=0;i<30;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=5+Math.random()*5+"s";
+    heart.style.fontSize=15+Math.random()*25+"px";
+    document.body.appendChild(heart);
+}
 
- "https://images.unsplash.com/photo-1520975922284-7b9588d0c1fb",
- "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
- "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
- "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
- "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+/* Typing Effect */
+const text = `
+Roses dry avuthayi,
+Chocolates karigipotayi...
 
-];
+Kani ninnu respect cheyadam,
+Neetho honest ga undatam,
+Neetho grow avvadam...
+
+<span class="highlight">
+Naa lifetime promise 💖
+</span>
+
+You are not just my Valentine,
+You are my Future ❤️
+`;
 
 let i=0;
+const speed=40;
+const target=document.getElementById("typeText");
 
-setInterval(()=>{
- document.body.style.backgroundImage=`url(${bg[i]})`;
- i=(i+1)%bg.length;
-},4000);
-
-document.body.style.backgroundImage=`url(${bg[0]})`;
-
-
-/* Floating Hearts */
-setInterval(()=>{
- let h=document.createElement("div");
- h.className="heart";
- h.innerHTML="❤️";
- h.style.left=Math.random()*100+"vw";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),6000);
-},600);
-
-
-/* Game */
-let score=0;
-document.getElementById("game").style.display="block";
-
-function tap(){
-
- score++;
- document.getElementById("score").innerText=score+" / 5";
-
- if(score>=5){
-  unlock();
- }
+function typeWriter(){
+    if(i<text.length){
+        target.innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typeWriter,speed);
+    }
 }
 
-function unlock(){
+typeWriter();
 
- document.getElementById("game").style.display="none";
- document.getElementById("story").style.display="block";
-
- // Play Music
- document.getElementById("music").contentWindow.postMessage(
- '{"event":"command","func":"playVideo","args":""}','*');
-
- type();
+/* Surprise Button */
+function showSurprise(){
+    document.getElementById("surprise").style.display="block";
 }
-
-
-/* Story */
-const story=[
-
-"At one point in my life, I thought I didn’t need anyone.",
-
-"But on February 9th, the day I met you, something changed.",
-
-"The first time I saw you, I felt a strange happiness.",
-
-"I didn’t know anything about you then…",
-
-"but I felt a vibe.",
-
-"And from that moment, I started liking you.",
-
-"Choosing someone for a lifetime is never easy.",
-
-"Everyone goes through confusion, doubts, and fear.",
-
-"Being an overthinker, I felt all of that even more.",
-
-"But from the first day itself, I stayed close to you —",
-
-"because I genuinely liked you.",
-
-"When I love someone,",
-
-"I love them with my whole heart.",
-
-"No half feelings. No pretending.",
-
-"Everything about you is interesting to me.",
-
-"Your words, your smile, your presence — everything.",
-
-"I’ve never said these words to anyone before.",
-
-"And I won’t say them to anyone in the future.",
-
-"I love my parents more than anything in this world.",
-
-"They are my life.",
-
-"And now…",
-
-"you are the only person I love equally with them.",
-
-"That’s how important you are to me.",
-
-"I love you Ammulu ❤️"
-
-];
-
-let line=0, char=0;
-
-
-function type(){
-
- let box=document.getElementById("text");
- box.innerHTML="";
- char=0;
-
- let t=setInterval(()=>{
-
-  box.innerHTML+=story[line][char];
-  char++;
-
-  if(char>=story[line].length){
-   clearInterval(t);
-  }
-
- },40);
-}
-
-
-function next(){
-
- line++;
-
- if(line<story.length){
-  type();
- }
- else{
-  document.getElementById("story").style.display="none";
-  document.getElementById("final").style.display="block";
- }
-}
-
-
-/* No Button Run */
-const noBtn=document.getElementById("noBtn");
-
-noBtn.addEventListener("mouseover",moveNo);
-noBtn.addEventListener("click",moveNo);
-
-function moveNo(){
-
- let x=Math.random()*200;
- let y=Math.random()*50;
-
- noBtn.style.left=x+"px";
- noBtn.style.top=y+"px";
-}
-
-
-/* Yes Button */
-function sayYes(){
-
- document.getElementById("loveMsg").innerHTML=`
- <h3 style="color:#e91e63;">
- I love you dear ❤️🥰
- </h3>
- <p>You are mine forever 💍</p>
- `;
-
- startLoveRain();
-}
-
-
-/* Hearts + Roses Rain */
-function startLoveRain(){
-
- setInterval(()=>{
-
-  let item=document.createElement("div");
-
-  let symbols=["❤️","💖","🌹","💕","🌸"];
-
-  item.innerHTML=symbols[
-   Math.floor(Math.random()*symbols.length)
-  ];
-
-  item.style.position="absolute";
-  item.style.left=Math.random()*100+"vw";
-  item.style.top="-20px";
-  item.style.fontSize=(25+Math.random()*25)+"px";
-  item.style.animation="fall 4s linear";
-
-  document.body.appendChild(item);
-
-  setTimeout(()=>item.remove(),4000);
-
- },200);
-}
-
-
-/* Falling Animation */
-let style=document.createElement("style");
-style.innerHTML=`
-@keyframes fall{
- from{transform:translateY(0);opacity:1;}
- to{transform:translateY(100vh);opacity:0;}
-}`;
-document.head.appendChild(style);
 
 </script>
 
