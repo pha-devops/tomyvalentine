@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentine 💖</title>
+
+<title>For Ammulu ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
@@ -17,76 +18,61 @@
 }
 
 body{
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    background:#ffffff;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden;
-}
-
-/* Floating Hearts */
-.heart{
-    position:absolute;
-    color:rgba(255,255,255,0.6);
-    font-size:20px;
-    animation:float 8s linear infinite;
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(100vh) scale(0.5);
-        opacity:0;
-    }
-    20%{opacity:1;}
-    100%{
-        transform:translateY(-100vh) scale(1.2);
-        opacity:0;
-    }
+    padding:20px;
 }
 
 /* Card */
 .card{
-    background:rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-    padding:40px;
+    background:#fff;
+    width:100%;
+    max-width:420px;
+    padding:30px 25px;
     border-radius:20px;
-    max-width:500px;
     text-align:center;
-    box-shadow:0 20px 40px rgba(0,0,0,0.2);
-    animation:fadeIn 2s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    animation:fadeIn 1.5s ease;
 }
 
 @keyframes fadeIn{
-    from{opacity:0;transform:translateY(50px);}
-    to{opacity:1;transform:translateY(0);}
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 h1{
-    font-family:'Great Vibes',cursive;
-    font-size:48px;
-    color:white;
+    font-family:'Great Vibes', cursive;
+    font-size:42px;
+    color:#ff3366;
     margin-bottom:20px;
-    text-shadow:0 0 15px pink;
 }
 
 .message{
-    color:white;
-    font-size:18px;
+    font-size:17px;
+    color:#333;
     min-height:200px;
     line-height:1.7;
 }
 
 .highlight{
-    color:#ffe600;
+    color:#ff3366;
     font-weight:500;
 }
 
 button{
     margin-top:25px;
-    padding:12px 25px;
+    padding:12px 24px;
     border:none;
-    border-radius:25px;
+    border-radius:30px;
     background:#ff3366;
     color:white;
     font-size:16px;
@@ -94,58 +80,66 @@ button{
     transition:0.3s;
 }
 
+button:active{
+    transform:scale(0.95);
+}
+
 button:hover{
     background:#ff0044;
-    transform:scale(1.05);
-    box-shadow:0 0 15px #ff0044;
 }
 
-/* Surprise */
-#surprise{
+/* Final Message */
+#final{
     display:none;
-    margin-top:20px;
+    margin-top:25px;
     font-size:22px;
-    color:#fff700;
-    animation:glow 1.5s infinite alternate;
+    color:#ff3366;
+    font-weight:500;
+    animation:pop 0.8s ease;
 }
 
-@keyframes glow{
-    from{text-shadow:0 0 5px yellow;}
-    to{text-shadow:0 0 20px yellow;}
+@keyframes pop{
+    0%{transform:scale(0.7);opacity:0;}
+    100%{transform:scale(1);opacity:1;}
+}
+
+/* Mobile Optimization */
+@media (max-width:480px){
+
+    h1{
+        font-size:36px;
+    }
+
+    .message{
+        font-size:16px;
+    }
+
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="card">
 
-    <h1>My Valentine 💖</h1>
+    <h1>My Valentine ❤️</h1>
 
     <div class="message" id="typeText"></div>
 
-    <button onclick="showSurprise()">Click for Surprise 💌</button>
+    <button onclick="showLove()">Tap Here 💌</button>
 
-    <div id="surprise">
-        You Are My Future 💍💖
+    <div id="final">
+        I Love You Ammulu ❤️
     </div>
 
 </div>
 
+
 <script>
 
-/* Floating hearts */
-for(let i=0;i<30;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=5+Math.random()*5+"s";
-    heart.style.fontSize=15+Math.random()*25+"px";
-    document.body.appendChild(heart);
-}
+/* Typing Text */
 
-/* Typing Effect */
 const text = `
 Roses dry avuthayi,
 Chocolates karigipotayi...
@@ -162,23 +156,29 @@ You are not just my Valentine,
 You are my Future ❤️
 `;
 
-let i=0;
-const speed=40;
-const target=document.getElementById("typeText");
+let i = 0;
+const speed = 35;
+const target = document.getElementById("typeText");
 
 function typeWriter(){
-    if(i<text.length){
-        target.innerHTML+=text.charAt(i);
+
+    if(i < text.length){
+
+        target.innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeWriter,speed);
+
+        setTimeout(typeWriter, speed);
     }
 }
 
 typeWriter();
 
-/* Surprise Button */
-function showSurprise(){
-    document.getElementById("surprise").style.display="block";
+
+/* Button Action */
+
+function showLove(){
+
+    document.getElementById("final").style.display = "block";
 }
 
 </script>
